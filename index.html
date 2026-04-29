@@ -48,12 +48,19 @@ body{
   position: fixed;
   inset: 0;
   z-index: -2;
-  /* Colore solido blu-verde acqua piscina come fallback istantaneo */
   background-color: #2d5a6e;
   background-image: url('https://hostegi.github.io/imgh/piscina.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: scroll;
+  /* Parte sfocata, va a fuoco quando l'immagine è caricata */
+  filter: blur(24px) saturate(1.1);
+  transform: scale(1.06); /* Compensa il blur che mostrerebbe i bordi */
+  transition: filter 0.9s ease-out, transform 0.9s ease-out;
+}
+.bg.loaded{
+  filter: blur(0) saturate(1);
+  transform: scale(1);
 }
 .bg::after{
   content: "";
@@ -325,16 +332,132 @@ body{
   margin: 8px auto;
 }
 
-/* ---------- ENTRANCE ANIMATION ---------- */
-.wrap > *{
-  opacity: 1;
-  transform: translateY(0);
-}
+/* ============================================
+   ANIMAZIONI ENTRATA E DINAMICHE BOTTONI
+   ============================================ */
 
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   ANIMAZIONI DINAMICHE BOTTONI
+   ============================================ */
+
+/* Entrata staggered: i bottoni appaiono uno dopo l'altro */
+.wrap > *{
+  opacity: 0;
+  transform: translateY(12px);
+  animation: slideIn 0.5s cubic-bezier(.2,.7,.3,1.2) forwards;
+}
+.wrap > *:nth-child(1){ animation-delay: 0.05s }
+.wrap > *:nth-child(2){ animation-delay: 0.18s }
+.wrap > *:nth-child(3){ animation-delay: 0.26s }
+.wrap > *:nth-child(4){ animation-delay: 0.32s }
+.wrap > *:nth-child(5){ animation-delay: 0.38s }
+.wrap > *:nth-child(6){ animation-delay: 0.42s }
+.wrap > *:nth-child(7){ animation-delay: 0.46s }
+.wrap > *:nth-child(8){ animation-delay: 0.50s }
+.wrap > *:nth-child(9){ animation-delay: 0.54s }
+.wrap > *:nth-child(10){ animation-delay: 0.58s }
+.wrap > *:nth-child(11){ animation-delay: 0.62s }
+.wrap > *:nth-child(12){ animation-delay: 0.66s }
+.wrap > *:nth-child(13){ animation-delay: 0.70s }
+
+@keyframes slideIn{
+  to{ opacity: 1; transform: translateY(0) }
+}
+
+/* Respiro sul bottone CTA vacanza */
+@keyframes breathe{
+  0%, 100%{
+    box-shadow: 0 8px 28px rgba(194, 93, 58, 0.4);
+    transform: scale(1);
+  }
+  50%{
+    box-shadow: 0 12px 36px rgba(194, 93, 58, 0.6);
+    transform: scale(1.015);
+  }
+}
+.btn-cta-vacanza{
+  animation: slideIn 0.5s cubic-bezier(.2,.7,.3,1.2) forwards, breathe 2.8s ease-in-out infinite 1.2s;
+}
+
+/* Respiro sul bottone CTA evento (sfumatura blu) */
+@keyframes breatheEvento{
+  0%, 100%{
+    box-shadow: 0 8px 24px rgba(10, 40, 64, 0.4);
+    transform: scale(1);
+  }
+  50%{
+    box-shadow: 0 12px 32px rgba(10, 40, 64, 0.6);
+    transform: scale(1.015);
+  }
+}
+.btn-cta-evento{
+  animation: slideIn 0.5s cubic-bezier(.2,.7,.3,1.2) forwards, breatheEvento 2.8s ease-in-out infinite 2.6s;
+}
+
+/* Effetto shine che attraversa periodicamente entrambi i bottoni CTA */
+.btn-cta-vacanza::before,
+.btn-cta-evento::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
+  pointer-events: none;
+}
+.btn-cta-vacanza::before{
+  animation: shine 4s ease-in-out infinite 2s;
+}
+.btn-cta-evento::before{
+  /* Shine più sottile (blu è più scuro, troppo bianco stonerebbe) */
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.22) 50%, transparent 70%);
+  animation: shine 4s ease-in-out infinite 3.4s;
+}
+@keyframes shine{
+  0%, 100%{ left: -100% }
+  50%, 60%{ left: 100% }
+}
+
+/* Hover/tap più reattivo su tutti i bottoni */
+.btn{
+  transition: transform 0.25s cubic-bezier(.2,.7,.3,1.4), background 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+}
+.btn:hover{
+  transform: translateY(-2px);
+}
+
+/* Tap mobile: scale + ripple già presenti, li rendo più visibili */
+.btn:active{
+  transform: scale(0.94);
+  transition: transform 0.08s ease;
+}
+
+/* Wiggle leggero al primo caricamento per indicare cliccabilità (solo touch device) */
+@media (hover: none) and (pointer: coarse){
+  @keyframes wiggleHint{
+    0%, 100%{ transform: translateY(0) }
+    25%{ transform: translateY(-3px) }
+    75%{ transform: translateY(1px) }
+  }
+  .btn-cta-vacanza{
+    animation:
+      slideIn 0.5s cubic-bezier(.2,.7,.3,1.2) forwards,
+      wiggleHint 0.6s ease-in-out 1.5s,
+      breathe 2.8s ease-in-out infinite 2.5s;
+  }
+  .btn-cta-evento{
+    animation:
+      slideIn 0.5s cubic-bezier(.2,.7,.3,1.2) forwards,
+      wiggleHint 0.6s ease-in-out 2s,
+      breatheEvento 2.8s ease-in-out infinite 3s;
   }
 }
 
@@ -347,7 +470,25 @@ body{
 </head>
 <body>
 
-<div class="bg" aria-hidden="true"></div>
+<div class="bg" id="bg" aria-hidden="true"></div>
+
+<script>
+  // Carica l'immagine in background, poi toglie il blur con una transizione fluida
+  (function(){
+    var img = new Image();
+    var bg = document.getElementById('bg');
+    img.onload = function(){
+      bg.classList.add('loaded');
+    };
+    img.onerror = function(){
+      // Se l'immagine non carica, toglie comunque il blur dopo 4 secondi
+      bg.classList.add('loaded');
+    };
+    img.src = 'https://hostegi.github.io/imgh/piscina.jpg';
+    // Fallback: se per qualunque motivo onload non scatta, toglie il blur dopo 6 secondi
+    setTimeout(function(){ bg.classList.add('loaded'); }, 6000);
+  })();
+</script>
 
 <div class="container">
 <main class="wrap">
