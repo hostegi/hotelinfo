@@ -3,26 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<meta name="theme-color" content="#1a3a4a">
+<meta name="theme-color" content="#0a2840">
 <meta name="description" content="Hotel delle Stelle — Sangineto Lido, Riviera dei Cedri. Contatti, preventivi, prenotazioni.">
-<title>Hotel delle Stelle — Contatti</title>
+<title>Hotel delle Stelle</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --mare: #1a3a4a;
-  --mare-scuro: #122936;
+  --blu: #0a2840;
+  --blu-scuro: #061a2b;
   --sabbia: #f5ede1;
-  --sabbia-scuro: #e8dcc8;
+  --sabbia-soft: #faf5ec;
   --terracotta: #c25d3a;
-  --terracotta-soft: #d97a55;
   --testo: #1a2935;
   --testo-soft: #5a6b78;
-  --bordo: rgba(26, 58, 74, 0.15);
-  --bordo-hover: rgba(26, 58, 74, 0.4);
+  --bianco-vetro: rgba(255, 255, 255, 0.92);
+  --bianco-vetro-hover: rgba(255, 255, 255, 1);
+  --bordo: rgba(10, 40, 64, 0.12);
+  --bordo-hover: rgba(10, 40, 64, 0.35);
   --radius: 12px;
   --radius-lg: 16px;
 }
@@ -32,20 +33,40 @@ html, body{overflow-x:hidden}
 
 body{
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--sabbia);
-  background-image:
-    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(26, 58, 74, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 40% at 50% 100%, rgba(194, 93, 58, 0.05) 0%, transparent 60%);
   color: var(--testo);
   min-height: 100vh;
   font-weight: 400;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
-  padding: 32px 20px 48px;
-  display: flex;
-  justify-content: center;
+  position: relative;
 }
 
+/* ---------- SFONDO FOTO PISCINA ---------- */
+.bg{
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url('https://hostegi.github.io/imgh/piscina.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+}
+.bg::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 40, 64, 0.55) 0%, rgba(10, 40, 64, 0.4) 40%, rgba(10, 40, 64, 0.65) 100%);
+}
+
+/* ---------- LAYOUT ---------- */
+.container{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 28px 18px 24px;
+}
 .wrap{
   width: 100%;
   max-width: 440px;
@@ -57,35 +78,40 @@ body{
 /* ---------- HEADER ---------- */
 .header{
   text-align: center;
-  padding: 12px 0 24px;
+  padding: 16px 0 28px;
+  color: #fff;
 }
 .header h1{
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 38px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 8.5vw, 36px);
   font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--mare);
-  font-style: italic;
-  font-variation-settings: "opsz" 144;
-  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: #fff;
+  line-height: 1.1;
+  white-space: nowrap;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
-.header h1 .top{
-  display: block;
-  font-size: 18px;
-  font-style: normal;
-  font-variation-settings: "opsz" 12;
-  letter-spacing: 0.04em;
-  color: var(--testo-soft);
+.header h1 .delle{
+  font-style: italic;
   font-weight: 400;
-  margin-bottom: 2px;
+  text-transform: lowercase;
+  font-size: 0.78em;
+  letter-spacing: 0.01em;
+  margin: 0 0.05em;
+  color: #f5ede1;
+}
+.header h1 .hotel,
+.header h1 .stelle{
+  text-transform: uppercase;
 }
 .header .sub{
-  margin-top: 14px;
-  font-size: 11px;
-  letter-spacing: 0.28em;
+  margin-top: 12px;
+  font-size: 10px;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--testo-soft);
+  color: rgba(255,255,255,0.85);
   font-weight: 500;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 .header::after{
   content: "";
@@ -96,7 +122,7 @@ body{
   margin: 16px auto 0;
 }
 
-/* ---------- BOTTONI BASE ---------- */
+/* ---------- BOTTONI BASE (vetro su foto) ---------- */
 .btn{
   display: flex;
   align-items: center;
@@ -105,9 +131,11 @@ body{
   width: 100%;
   min-height: 54px;
   padding: 14px 18px;
-  background: #fff;
+  background: var(--bianco-vetro);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--testo);
-  border: 1px solid var(--bordo);
+  border: 1px solid rgba(255,255,255,0.6);
   border-radius: var(--radius);
   font-family: inherit;
   font-size: 14px;
@@ -115,66 +143,86 @@ body{
   letter-spacing: 0.01em;
   text-decoration: none;
   cursor: pointer;
-  transition: border-color .2s ease, transform .15s ease, box-shadow .2s ease;
+  transition: transform .25s cubic-bezier(.2,.7,.3,1.4), background .2s ease, box-shadow .25s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  position: relative;
+  overflow: hidden;
 }
 .btn:hover, .btn:focus-visible{
-  border-color: var(--bordo-hover);
+  background: var(--bianco-vetro-hover);
   outline: none;
-  box-shadow: 0 4px 16px rgba(26, 58, 74, 0.08);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
 }
-.btn:active{ transform: scale(0.985) }
+/* Animazione tap mobile: leggera spinta + ripple */
+.btn:active{
+  transform: scale(0.96);
+  transition: transform .1s ease;
+}
+.btn::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: rgba(10, 40, 64, 0.25);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  pointer-events: none;
+}
+.btn:active::after{
+  animation: ripple .55s ease-out;
+}
+@keyframes ripple{
+  0%{ transform: translate(-50%, -50%) scale(0); opacity: 0.6 }
+  100%{ transform: translate(-50%, -50%) scale(40); opacity: 0 }
+}
 
 .btn .icon{
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-  stroke: var(--mare);
+  stroke: var(--blu);
   stroke-width: 1.7;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-/* ---------- CTA PRINCIPALE ---------- */
+/* ---------- CTA PRINCIPALI (vacanza & evento) ---------- */
 .btn-cta{
-  background: var(--mare);
-  color: var(--sabbia);
-  border: 1px solid var(--mare);
-  flex-direction: column;
-  gap: 4px;
-  min-height: 76px;
-  padding: 16px 18px;
-  box-shadow: 0 8px 24px rgba(26, 58, 74, 0.18);
-  position: relative;
-  overflow: hidden;
-}
-.btn-cta:hover, .btn-cta:focus-visible{
-  background: var(--mare-scuro);
-  border-color: var(--mare-scuro);
-  box-shadow: 0 12px 32px rgba(26, 58, 74, 0.25);
-}
-.btn-cta .cta-main{
-  font-size: 15px;
+  min-height: 60px;
   font-weight: 600;
+  font-size: 14px;
   letter-spacing: 0.02em;
+  position: relative;
 }
-.btn-cta .cta-sub{
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  opacity: 0.75;
-  color: var(--sabbia-scuro);
-}
-.btn-cta::before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
+/* CTA VACANZA - Terracotta acceso per massima visibilità */
+.btn-cta-vacanza{
   background: var(--terracotta);
+  color: #fff;
+  border: 1px solid var(--terracotta);
+  box-shadow: 0 8px 28px rgba(194, 93, 58, 0.4);
 }
+.btn-cta-vacanza:hover, .btn-cta-vacanza:focus-visible{
+  background: #d96d45;
+  border-color: #d96d45;
+  box-shadow: 0 10px 32px rgba(194, 93, 58, 0.5);
+}
+.btn-cta-vacanza .icon{ stroke: #fff }
+/* CTA EVENTO - Blu su vetro */
+.btn-cta-evento{
+  background: var(--blu);
+  color: var(--sabbia);
+  border: 1px solid var(--blu);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.btn-cta-evento:hover, .btn-cta-evento:focus-visible{
+  background: var(--blu-scuro);
+  border-color: var(--blu-scuro);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.3);
+}
+.btn-cta-evento .icon{ stroke: var(--sabbia) }
 
 /* ---------- ROW 2 COLONNE ---------- */
 .row-2{
@@ -188,18 +236,19 @@ body{
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 18px 4px 4px;
+  margin: 14px 4px 2px;
   font-size: 10px;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--testo-soft);
+  color: rgba(255,255,255,0.92);
   font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }
 .label::before, .label::after{
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--bordo);
+  background: rgba(255,255,255,0.3);
 }
 
 /* ---------- ROW 3 COLONNE (recensioni) ---------- */
@@ -213,96 +262,70 @@ body{
   gap: 6px;
   min-height: 68px;
   padding: 10px 6px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-/* ---------- POPUP EMAIL ---------- */
-.popup-overlay{
-  position: fixed;
-  inset: 0;
-  background: rgba(18, 41, 54, 0.75);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  z-index: 100;
-  animation: fadeIn .2s ease;
-}
-.popup-overlay.active{ display: flex }
-.popup{
-  background: var(--sabbia);
-  border-radius: var(--radius-lg);
-  padding: 28px 22px 18px;
-  width: 100%;
-  max-width: 360px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.3);
-  animation: slideUp .25s ease;
-}
-.popup h3{
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 22px;
-  font-weight: 500;
-  font-style: italic;
-  color: var(--mare);
-  text-align: center;
-  margin-bottom: 18px;
-}
-.popup .btn{ margin-bottom: 10px }
-.popup .close{
-  margin-top: 4px;
-  background: transparent;
-  border: none;
-  color: var(--testo-soft);
   font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
   font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-  min-height: 44px;
-  font-family: inherit;
+  letter-spacing: 0.04em;
 }
-.popup .close:hover{ color: var(--mare) }
 
-@keyframes fadeIn{ from{opacity:0} to{opacity:1} }
-@keyframes slideUp{ from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:translateY(0)} }
+/* ---------- BOTTONE POSIZIONE (in evidenza prima del footer) ---------- */
+.btn-mappa{
+  background: var(--sabbia);
+  border: 1px solid var(--sabbia-soft);
+  color: var(--blu);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-top: 8px;
+}
+.btn-mappa:hover, .btn-mappa:focus-visible{
+  background: #fff;
+  border-color: #fff;
+}
+.btn-mappa .icon{ stroke: var(--terracotta); stroke-width: 2 }
 
 /* ---------- FOOTER ---------- */
 .footer{
+  margin-top: 24px;
+  padding: 22px 18px 16px;
+  background: rgba(6, 26, 43, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
   text-align: center;
-  margin-top: 28px;
-  padding-top: 22px;
-  border-top: 1px solid var(--bordo);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  color: var(--testo-soft);
+  color: rgba(255,255,255,0.88);
+  font-size: 13px;
+  line-height: 1.7;
   font-weight: 400;
+}
+.footer .name{
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-weight: 500;
   font-style: italic;
-  font-family: 'Fraunces', Georgia, serif;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: 0.01em;
+}
+.footer a{
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  transition: border-color .2s ease;
+}
+.footer a:hover{ border-bottom-color: var(--terracotta) }
+.footer .sep{
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: rgba(255,255,255,0.2);
+  margin: 8px auto;
 }
 
 /* ---------- ENTRANCE ANIMATION ---------- */
 .wrap > *{
-  opacity: 0;
-  transform: translateY(8px);
-  animation: enter .45s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
-.wrap > *:nth-child(1){ animation-delay: .05s }
-.wrap > *:nth-child(2){ animation-delay: .14s }
-.wrap > *:nth-child(3){ animation-delay: .2s }
-.wrap > *:nth-child(4){ animation-delay: .26s }
-.wrap > *:nth-child(5){ animation-delay: .3s }
-.wrap > *:nth-child(6){ animation-delay: .34s }
-.wrap > *:nth-child(7){ animation-delay: .38s }
-.wrap > *:nth-child(8){ animation-delay: .42s }
-.wrap > *:nth-child(9){ animation-delay: .46s }
-.wrap > *:nth-child(10){ animation-delay: .5s }
-.wrap > *:nth-child(11){ animation-delay: .54s }
-.wrap > *:nth-child(12){ animation-delay: .58s }
-@keyframes enter{ to{ opacity:1; transform:translateY(0) } }
 
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{
@@ -310,25 +333,39 @@ body{
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Mobile small fix */
+@media (max-width: 360px){
+  .header h1{ font-size: 26px }
+  .btn{ font-size: 13px; min-height: 52px }
+}
 </style>
 </head>
 <body>
 
+<div class="bg" aria-hidden="true"></div>
+
+<div class="container">
 <main class="wrap">
 
   <!-- HEADER -->
   <header class="header">
     <h1>
-      <span class="top">Hotel</span>
-      delle Stelle
+      <span class="hotel">Hotel</span><span class="delle">delle</span><span class="stelle">Stelle</span>
     </h1>
-    <div class="sub">Sangineto Lido &middot; Calabria</div>
+    <div class="sub">Sangineto Lido &middot; Riviera dei Cedri</div>
   </header>
 
-  <!-- CTA PRINCIPALE: PREVENTIVO VACANZA -->
-  <a class="btn btn-cta" href="https://emanuel55.typeform.com/to/ngasNir4?utm_source=site_prenota&typeform-source=www.hoteldellestelle.it" target="_blank" rel="noopener">
-    <span class="cta-main">Richiedi il preventivo per la tua vacanza</span>
-    <span class="cta-sub">Soggiorno &middot; Mezza pensione &middot; Pensione completa</span>
+  <!-- CTA VACANZA -->
+  <a class="btn btn-cta btn-cta-vacanza" href="https://emanuel55.typeform.com/to/ngasNir4?utm_source=site_prenota&typeform-source=www.hoteldellestelle.it" target="_blank" rel="noopener">
+    <svg class="icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Richiedi il preventivo per la tua vacanza
+  </a>
+
+  <!-- CTA EVENTO -->
+  <a class="btn btn-cta btn-cta-evento" href="mailto:eventi@hoteldellestelle.it?subject=Richiesta%20preventivo%20evento">
+    <svg class="icon" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+    Richiedi il preventivo per il tuo evento
   </a>
 
   <!-- CHIAMACI / SCRIVICI -->
@@ -337,10 +374,10 @@ body{
       <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       Chiamaci
     </a>
-    <button class="btn" type="button" onclick="document.getElementById('emailPopup').classList.add('active')">
+    <a class="btn" href="mailto:info@hoteldellestelle.it">
       <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       Scrivici
-    </button>
+    </a>
   </div>
 
   <!-- WEB & SOCIAL -->
@@ -352,41 +389,29 @@ body{
   </a>
 
   <div class="row-2">
-    <!-- SOSTITUISCI HREF FACEBOOK -->
-    <a class="btn" href="https://www.facebook.com/" target="_blank" rel="noopener">
+    <a class="btn" href="https://www.facebook.com/share/18sF2zj7yi/?mibextid=wwXIfr" target="_blank" rel="noopener">
       <svg class="icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
       Facebook
     </a>
-    <!-- SOSTITUISCI HREF INSTAGRAM -->
-    <a class="btn" href="https://www.instagram.com/" target="_blank" rel="noopener">
+    <a class="btn" href="https://www.instagram.com/hoteldellestelle?igsh=MWY0MDFpY3ZobTlwdA==" target="_blank" rel="noopener">
       <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
       Instagram
     </a>
   </div>
 
-  <!-- POSIZIONE -->
-  <!-- SOSTITUISCI HREF GOOGLE MAPS CON LINK SPECIFICO AL PIN -->
-  <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Hotel+delle+Stelle+Sangineto+Lido" target="_blank" rel="noopener">
-    <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-    Dove ci troviamo
-  </a>
-
   <!-- RECENSIONI -->
   <div class="label">Lasciaci una recensione</div>
 
   <div class="row-3">
-    <!-- SOSTITUISCI HREF GOOGLE REVIEWS -->
-    <a class="btn" href="#" target="_blank" rel="noopener">
+    <a class="btn" href="https://www.google.com/travel/search?gsas=1&ts=EggKAggDCgIIAxocEhoSFAoHCOoPEAQYHhIHCOoPEAUYARgBMgIQAA&qs=MhNDZ29JNjk3ZDVxM3lwTDhQRUFFOAI&ap=ugEHcmV2aWV3cw&ictx=111&client=safari&hl=it-IT&ved=0CAAQ5JsGahcKEwj43c-B05KUAxUAAAAAHQAAAAAQDA" target="_blank" rel="noopener">
       <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       Google
     </a>
-    <!-- SOSTITUISCI HREF TRIPADVISOR -->
-    <a class="btn" href="#" target="_blank" rel="noopener">
+    <a class="btn" href="https://www.tripadvisor.it/UserReviewEdit-g1453728-d1817564-Hotel_delle_Stelle_Beach_Resort-Sangineto_Province_of_Cosenza_Calabria.html" target="_blank" rel="noopener">
       <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       Tripadvisor
     </a>
-    <!-- SOSTITUISCI HREF FACEBOOK REVIEWS -->
-    <a class="btn" href="#" target="_blank" rel="noopener">
+    <a class="btn" href="https://www.facebook.com/hoteldellestellebeachresort" target="_blank" rel="noopener">
       <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       Facebook
     </a>
@@ -396,38 +421,33 @@ body{
   <div class="label">I nostri flyer</div>
 
   <div class="row-2">
-    <!-- SOSTITUISCI HREF FLYER EVENTI -->
-    <a class="btn" href="#" target="_blank" rel="noopener">
+    <a class="btn" href="https://hostegi.github.io/hoteldellestelle/" target="_blank" rel="noopener">
       <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       Eventi
     </a>
-    <!-- SOSTITUISCI HREF FLYER RIVIERA DEI CEDRI -->
-    <a class="btn" href="#" target="_blank" rel="noopener">
+    <a class="btn" href="https://hostegi.github.io/rivieradeicedri/" target="_blank" rel="noopener">
       <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       Riviera dei Cedri
     </a>
   </div>
 
+  <!-- POSIZIONE (prima del footer) -->
+  <a class="btn btn-mappa" href="https://www.google.com/maps/search/?api=1&query=Hotel+delle+Stelle+Sangineto+Lido" target="_blank" rel="noopener">
+    <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Dove ci troviamo
+  </a>
+
+  <!-- FOOTER -->
   <footer class="footer">
-    Hotel delle Stelle
+    <div class="name">Hotel delle Stelle</div>
+    Viale della Libert&agrave;, 29<br>
+    87020 &mdash; Sangineto Lido (CS)
+    <span class="sep"></span>
+    Tel. <a href="tel:098296091">0982 96091</a><br>
+    <a href="https://www.hoteldellestelle.it" target="_blank" rel="noopener">www.hoteldellestelle.it</a>
   </footer>
 
 </main>
-
-<!-- POPUP EMAIL -->
-<div class="popup-overlay" id="emailPopup" onclick="if(event.target===this)this.classList.remove('active')">
-  <div class="popup">
-    <h3>Scrivici</h3>
-    <a class="btn" href="mailto:info@hoteldellestelle.it">
-      <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Informazioni
-    </a>
-    <a class="btn" href="mailto:eventi@hoteldellestelle.it">
-      <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Eventi
-    </a>
-    <button class="close" type="button" onclick="document.getElementById('emailPopup').classList.remove('active')">Chiudi</button>
-  </div>
 </div>
 
 </body>
