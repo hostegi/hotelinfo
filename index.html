@@ -11,9 +11,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-<!-- Preload immagine piscina per caricamento prioritario -->
-<link rel="preload" as="image" href="https://hostegi.github.io/imgh/piscina.jpg">
-
 <style>
 :root{
   --blu: #0a2840;
@@ -42,6 +39,8 @@ body{
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   position: relative;
+  /* Sfondo immediato blu-acqua così non si vede mai bianco */
+  background: #2d5a6e;
 }
 
 /* ---------- SFONDO FOTO PISCINA ---------- */
@@ -55,13 +54,6 @@ body{
   background-size: cover;
   background-position: center;
   background-attachment: scroll;
-  /* Effetto blur sfumato mentre carica */
-  filter: blur(0);
-  transition: filter 0.3s ease;
-}
-/* Mentre carica mostra solo il colore solido */
-.bg.loading{
-  filter: blur(20px);
 }
 .bg::after{
   content: "";
